@@ -280,7 +280,27 @@ typedef struct __attribute__((packed)) {
  * Characteristics of words of immediate information (ephemeris parameters)"
  * for more details.
  */
-#define SBP_MSG_EPHEMERIS_GLO        0x0085
+#define SBP_MSG_EPHEMERIS_GLO        0x0087
+typedef struct __attribute__((packed)) {
+  ephemeris_common_content_t common;    /**< Values common for all ephemeris types */
+  double gamma;     /**< Relative deviation of predicted carrier frequency from nominal */
+  double tau;       /**< Correction to the SV time [s] */
+  double d_tau;     /**< Equipment delay between L1 and L2 [s] */
+  double pos[3];    /**< Position of the SV at tb in PZ-90.02 coordinates system [m] */
+  double vel[3];    /**< Velocity vector of the SV at tb in PZ-90.02 coordinates system [m/s] */
+  double acc[3];    /**< Acceleration vector of the SV at tb in PZ-90.02 coordinates sys [m/s^2] */
+} msg_ephemeris_glo_t;
+
+
+/** Satellite broadcast ephemeris for GLO
+ *
+ * The ephemeris message returns a set of satellite orbit
+ * parameters that is used to calculate GLO satellite position,
+ * velocity, and clock offset. Please see the GLO ICD 5.1 "Table 4.5
+ * Characteristics of words of immediate information (ephemeris parameters)"
+ * for more details.
+ */
+#define SBP_MSG_EPHEMERIS_GLO_DEP_B  0x0085
 typedef struct __attribute__((packed)) {
   ephemeris_common_content_t common;    /**< Values common for all ephemeris types */
   double gamma;     /**< Relative deviation of predicted carrier frequency from nominal */
@@ -288,7 +308,7 @@ typedef struct __attribute__((packed)) {
   double pos[3];    /**< Position of the SV at tb in PZ-90.02 coordinates system [m] */
   double vel[3];    /**< Velocity vector of the SV at tb in PZ-90.02 coordinates system [m/s] */
   double acc[3];    /**< Acceleration vector of the SV at tb in PZ-90.02 coordinates sys [m/s^2] */
-} msg_ephemeris_glo_t;
+} msg_ephemeris_glo_dep_b_t;
 
 
 /** Satellite broadcast ephemeris
@@ -728,7 +748,9 @@ coordinate system
 typedef struct __attribute__((packed)) {
   u16 wn;        /**< GPS Week number [week] */
   u32 tow_ms;    /**< GPS Time of week [ms] */
-  u8 fcns[32];  /**< GLONASS fequency number per orbital slot */
+  u8 fcns[32];  /**< GLONASS fequency number per orbital slot. Value of 0xFF indicates
+this slot does not have a mapping.
+ */
 } msg_fcns_glo_t;
 
 

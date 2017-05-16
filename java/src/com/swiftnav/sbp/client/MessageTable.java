@@ -64,6 +64,7 @@ import com.swiftnav.sbp.observation.MsgEphemerisSbasDepA;
 import com.swiftnav.sbp.observation.MsgEphemerisGloDepA;
 import com.swiftnav.sbp.observation.MsgEphemerisSbas;
 import com.swiftnav.sbp.observation.MsgEphemerisGlo;
+import com.swiftnav.sbp.observation.MsgEphemerisGloDepB;
 import com.swiftnav.sbp.observation.MsgEphemerisDepD;
 import com.swiftnav.sbp.observation.MsgEphemerisDepA;
 import com.swiftnav.sbp.observation.MsgEphemerisDepB;
@@ -229,6 +230,8 @@ final class MessageTable {
                 return new MsgEphemerisSbas(msg);
             case MsgEphemerisGlo.TYPE:
                 return new MsgEphemerisGlo(msg);
+            case MsgEphemerisGloDepB.TYPE:
+                return new MsgEphemerisGloDepB(msg);
             case MsgEphemerisDepD.TYPE:
                 return new MsgEphemerisDepD(msg);
             case MsgEphemerisDepA.TYPE:

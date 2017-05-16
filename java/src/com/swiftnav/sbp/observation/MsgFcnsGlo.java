@@ -50,7 +50,9 @@ public class MsgFcnsGlo extends SBPMessage {
     /** GPS Time of week */
     public long tow_ms;
     
-    /** GLONASS fequency number per orbital slot */
+    /** GLONASS fequency number per orbital slot. Value of 0xFF indicates
+this slot does not have a mapping.
+ */
     public int[] fcns;
     
 
